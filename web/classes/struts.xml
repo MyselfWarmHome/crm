@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+	
+<struts>
+	<!-- 配置包的结构 -->
+	<package name="crm" namespace="/" extends="struts-default">
+		<!-- 配置客户的action 如果Action由Spring框架来管理，只需要在class标签上只需要编写ID值就可以-->
+		<action name="customer_*" class="com.itheima.web.action.CustomerAction" method="{1}">
+			<!--<result name="success">/jsp/success.jsp</result>-->
+		</action>
+	</package>    
+</struts>
+
+
+
+
+
+
+
+
+
+
+
+
+
