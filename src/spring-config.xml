@@ -68,5 +68,5 @@
     <!--<bean id="customerDao" class="com.itheima.dao.CustomerDaoImpl">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>-->
-
+    <bean></bean>
 </beans>
