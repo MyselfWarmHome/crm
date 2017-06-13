@@ -10,13 +10,38 @@
 <LINK href="${pageContext.request.contextPath }/css/Manage.css" type=text/css
 	rel=stylesheet>
 
-
+<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-1.11.3.min.js"></script>
 <META content="MSHTML 6.00.2900.3492" name=GENERATOR>
+<script type="text/javascript">
+	$(function(){
+		//发送ajax请求
+		$.post("${pageContext.request.contextPath }/dict_findByCode.action",{"dict_type_code":"006"},function(data){
+			//遍历
+			$(data).each(function(i,n){
+				//i代表索引 n代表json对象
+				//alert(this.dict_item_name);
+				//alert(i+":"+n.dict_item_name);
+				$("#level").append("<option value='"+this.dict_id+"'>"+this.dict_item_name+"</option>");
+			});
+		},"json");
+		
+		//客户的来源
+		$.post("${pageContext.request.contextPath }/dict_findByCode.action",{"dict_type_code":"002"},function(data){
+			//遍历
+			$(data).each(function(i,n){
+				//i代表索引 n代表json对象
+				//alert(this.dict_item_name);
+				//alert(i+":"+n.dict_item_name);
+				$("#sourceId").append("<option value='"+this.dict_id+"'>"+this.dict_item_name+"</option>");
+			});
+		},"json");
+	});
+</script>
 </HEAD>
 <BODY>
 	<FORM id=form1 name=form1
 		action="${pageContext.request.contextPath }/customer_add.action"
-		method=post>
+		method=post enctype="multipart/form-data">
 		
 
 		<TABLE cellSpacing=0 cellPadding=0 width="98%" border=0>
@@ -57,8 +82,7 @@
 								</td>
 								<td>客户级别 ：</td>
 								<td>
-								<INPUT class=textbox id=sChannel2
-														style="WIDTH: 180px" maxLength=50 name="cust_level">
+								<select name="level.dict_id" id="level"></select> 
 								</td>
 							</TR>
 							
@@ -66,12 +90,11 @@
 								
 								<td>信息来源 ：</td>
 								<td>
-								<INPUT class=textbox id=sChannel2
-														style="WIDTH: 180px" maxLength=50 name="cust_source">
+									<select name="source.dict_id" id="sourceId"></select>
 								</td>
 								<td>联系人：</td>
 								<td>
-								<INPUT class=textbox id=sChannel2
+								<INPUT class=textbox id=sChannel3
 														style="WIDTH: 180px" maxLength=50 name="cust_linkman">
 								</td>
 							</TR>
@@ -81,12 +104,12 @@
 								
 								<td>固定电话 ：</td>
 								<td>
-								<INPUT class=textbox id=sChannel2
+								<INPUT class=textbox id=sChannel4
 														style="WIDTH: 180px" maxLength=50 name="cust_phone">
 								</td>
 								<td>移动电话 ：</td>
 								<td>
-								<INPUT class=textbox id=sChannel2
+								<INPUT class=textbox id=sChannel5
 														style="WIDTH: 180px" maxLength=50 name="cust_mobile">
 								</td>
 							</TR>
@@ -94,27 +117,33 @@
 							<TR>
 								<td>联系地址 ：</td>
 								<td>
-								<INPUT class=textbox id=sChannel2
+								<INPUT class=textbox id=sChannel6
 														style="WIDTH: 180px" maxLength=50 name="cust_address">
 								</td>
 								<td>邮政编码 ：</td>
 								<td>
-								<INPUT class=textbox id=sChannel2
+								<INPUT class=textbox id=sChannel7
 														style="WIDTH: 180px" maxLength=50 name="cust_zip">
 								</td>
 							</TR>
 							<TR>
 								<td>客户传真 ：</td>
 								<td>
-								<INPUT class=textbox id=sChannel2
+								<INPUT class=textbox id=sChannel8
 														style="WIDTH: 180px" maxLength=50 name="cust_fax">
 								</td>
 								<td>客户网址 ：</td>
 								<td>
-								<INPUT class=textbox id=sChannel2
+								<INPUT class=textbox id=sChannel9
 														style="WIDTH: 180px" maxLength=50 name="cust_website">
 								</td>
 							</TR>
+								<tr>
+									<td colspan="1">客户资历:</td>
+									<td colspan="3" style="margin-left: auto">
+										<INPUT type="file" name="upload"/>
+									</td>
+							</tr>
 							<tr>
 								<td rowspan=2>
 								<INPUT class=button id=sButton2 type=submit
